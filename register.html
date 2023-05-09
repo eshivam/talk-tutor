@@ -76,6 +76,15 @@
             src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf");
         }
     </style>
+    <script>
+    function store() {
+                var username = document.getElementById("mail").value;
+                var password = document.getElementById("pwdbar").value;
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+                alert("Credentials stored successfully!");
+            }
+        </script>
   </head>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="login.css">
@@ -353,7 +362,7 @@
             <input type="password" id="pwdbar" onclick="closeye();" name="pwd" class="tb" placeholder=" Re-Enter Password">
             <br>
             <br>
-            <input type="submit" name="login" class="sbutton" value="R E G I S T E R">
+            <input type="submit" onclick="store()" name="login" class="sbutton" value="R E G I S T E R">
             <p style="margin-top:20px ;">Already have an account ? <a href="/login.html" style="color: rgb(98,82,216);" >Login Now</a></p>
           </form>
         </div>
