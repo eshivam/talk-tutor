@@ -78,12 +78,28 @@
     </style>
     <script>
     function store() {
-                var username = document.getElementById("mail").value;
-                var password = document.getElementById("pwdbar").value;
-                localStorage.setItem("username", username);
-                localStorage.setItem("password", password);
-                alert("Credentials stored successfully!");
-            }
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	var storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+	var userExists = storedUsers.some(function(user) {
+		return user.username === username;
+	});
+
+	if(userExists) {
+		alert("Username already exists. Please choose a different username.");
+		return;
+	}
+
+	storedUsers.push({
+		username: username,
+		password: password
+	});
+
+	localStorage.setItem("users", JSON.stringify(storedUsers));
+	alert("Registered successfully!");
+}
+
         </script>
   </head>
   <link rel="stylesheet" href="styles.css">
@@ -350,16 +366,16 @@
         </div>
         <div class="formcon">
           <form>
-            <input type="email" id="mail" name="email" onclick="openeye();" class="tb" placeholder="Email" autocomplete="off">
+            <input type="email" id="username" name="email" onclick="openeye();" class="tb" placeholder="Email" autocomplete="off">
             <br>
             <br>
-            <input type="text" id="mail" name="email" onclick="openeye();" class="tb" placeholder="Choose Username" autocomplete="off">
+            <input type="text" id="username" name="email" onclick="openeye();" class="tb" placeholder="Choose Username" autocomplete="off">
             <br>
             <br>
-            <input type="password" id="pwdbar" onclick="closeye();" name="pwd" class="tb" placeholder="Create Password">
+            <input type="password" id="password" onclick="closeye();" name="pwd" class="tb" placeholder="Create Password">
             <br>
             <br>
-            <input type="password" id="pwdbar" onclick="closeye();" name="pwd" class="tb" placeholder=" Re-Enter Password">
+            <input type="password" id="password" onclick="closeye();" name="pwd" class="tb" placeholder=" Re-Enter Password">
             <br>
             <br>
             <input type="submit" onclick="store()" name="login" class="sbutton" value="R E G I S T E R">
