@@ -76,6 +76,20 @@
           src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf");
       }
   </style>
+  <script>
+            function validate() {
+                var username = document.getElementById("mail").value;
+                var password = document.getElementById("pwdbar").value;
+                var storedUsername = localStorage.getItem("username");
+                var storedPassword = localStorage.getItem("password");
+                if(username == storedUsername && password == storedPassword) {
+                    alert("Login Successful!");
+                }
+                else {
+                    alert("Invalid username or password!");
+                }
+            }
+  </script>
 </head>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="login.css">
@@ -347,7 +361,7 @@ class="login-btn w-inline-block">
           <input type="password" id="pwdbar" onclick="closeye();" name="pwd" class="tb" placeholder="Password">
           <br>
           <br>
-          <input type="submit" name="login" class="sbutton" value="L O G I N">
+          <input type="submit" onclick="validate()" name="login" class="sbutton" value="L O G I N">
           <p style="margin-top:20px ;">Does not have account ? <a href="/register.html" style="color: rgb(98,82,216);" >Sign Up</a></p>
         </form>
       </div>
