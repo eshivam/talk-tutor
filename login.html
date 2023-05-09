@@ -78,17 +78,22 @@
   </style>
   <script>
             function validate() {
-                var username = document.getElementById("mail").value;
-                var password = document.getElementById("pwdbar").value;
-                var storedUsername = localStorage.getItem("username");
-                var storedPassword = localStorage.getItem("password");
-                if(username == storedUsername && password == storedPassword) {
-                    alert("Login Successful!");
-                }
-                else {
-                    alert("Invalid username or password!");
-                }
-            }
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	var storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+	var isValidUser = storedUsers.some(function(user) {
+		return user.username === username && user.password === password;
+	});
+
+	if(isValidUser) {
+		alert("Login Successful!");
+	}
+	else {
+		alert("Invalid username or password!");
+	}
+}
+
   </script>
 </head>
 <link rel="stylesheet" href="styles.css">
@@ -355,14 +360,14 @@ class="login-btn w-inline-block">
       </div>
       <div class="formcon">
         <form>
-          <input type="email" id="mail" name="email" onclick="openeye();" class="tb" placeholder="Email" autocomplete="off">
+          <input type="email" id="username" name="email" onclick="openeye();" class="tb" placeholder="Email" autocomplete="off">
           <br>
           <br>
-          <input type="password" id="pwdbar" onclick="closeye();" name="pwd" class="tb" placeholder="Password">
+          <input type="password" id="password" onclick="closeye();" name="pwd" class="tb" placeholder="Password">
           <br>
           <br>
           <input type="submit" onclick="validate()" name="login" class="sbutton" value="L O G I N">
-          <p style="margin-top:20px ;">Does not have account ? <a href="/register.html" style="color: rgb(98,82,216);" >Sign Up</a></p>
+          <p style="margin-top:20px ;">Does not have account ? <a href="register.html" style="color: rgb(98,82,216);" >Sign Up</a></p>
         </form>
       </div>
       <footer class="foot"><a style="color: #bababa; text-decoration: none;" href=""></a></footer>
